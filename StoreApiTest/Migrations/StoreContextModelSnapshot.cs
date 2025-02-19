@@ -30,7 +30,7 @@ namespace StoreApiTest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Addres")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -44,7 +44,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Bussiness.Models.CustomerProduct", b =>
@@ -70,7 +70,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CustomerProducts", (string)null);
+                    b.ToTable("CustomerProducts");
                 });
 
             modelBuilder.Entity("Bussiness.Models.Product", b =>
@@ -97,7 +97,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Bussiness.Models.ProductStore", b =>
@@ -123,7 +123,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.ToTable("StoreProducts", (string)null);
+                    b.ToTable("StoreProducts");
                 });
 
             modelBuilder.Entity("Bussiness.Models.Store", b =>
@@ -134,17 +134,17 @@ namespace StoreApiTest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Addres")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Surcursal")
+                    b.Property<string>("Sucursal")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stores", (string)null);
+                    b.ToTable("Stores");
                 });
 
             modelBuilder.Entity("Bussiness.Models.CustomerProduct", b =>

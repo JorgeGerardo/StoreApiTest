@@ -12,8 +12,8 @@ using StoreApiTest.Data;
 namespace StoreApiTest.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20250219002517_Initial")]
-    partial class Initial
+    [Migration("20250219012841_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace StoreApiTest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Addres")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -137,11 +137,11 @@ namespace StoreApiTest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Addres")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Surcursal")
+                    b.Property<string>("Sucursal")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
