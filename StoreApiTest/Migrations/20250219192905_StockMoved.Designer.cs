@@ -12,8 +12,8 @@ using StoreApiTest.Data;
 namespace StoreApiTest.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20250219033019_UserTableAdded")]
-    partial class UserTableAdded
+    [Migration("20250219192905_StockMoved")]
+    partial class StockMoved
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,9 +95,6 @@ namespace StoreApiTest.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Products");
@@ -115,6 +112,9 @@ namespace StoreApiTest.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Stock")
                         .HasColumnType("int");
 
                     b.Property<int>("StoreId")
@@ -184,7 +184,7 @@ namespace StoreApiTest.Migrations
                             Id = 1,
                             Email = "jorguito@example.com",
                             HashPassword = "b88b88cd87cf54d08aabf61b73023cf35551850dc8da5a9d8ae410ef243f74ce",
-                            Role = 0
+                            Role = 1
                         },
                         new
                         {

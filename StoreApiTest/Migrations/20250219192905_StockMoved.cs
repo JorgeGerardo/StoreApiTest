@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace StoreApiTest.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class StockMoved : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,8 +36,7 @@ namespace StoreApiTest.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false)
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,6 +55,27 @@ namespace StoreApiTest.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stores", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HashPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    Role = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -91,6 +113,7 @@ namespace StoreApiTest.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     StoreId = table.Column<int>(type: "int", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -108,6 +131,16 @@ namespace StoreApiTest.Migrations
                         principalTable: "Stores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CustomerId", "Email", "HashPassword", "Role" },
+                values: new object[,]
+                {
+                    { 1, null, "jorguito@example.com", "b88b88cd87cf54d08aabf61b73023cf35551850dc8da5a9d8ae410ef243f74ce", 1 },
+                    { 2, null, "lucrecia@example.com", "362b3c03a6b7ad6e47e3029b1eb9f31194123825ff4aec5833feca5e120446f0", 0 },
+                    { 3, null, "samueljuan@example.com", "67a0978030e50d8f060cc216bc9ae8ea0e3fa38f0951cc412e5b41744f548add", 0 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -129,6 +162,11 @@ namespace StoreApiTest.Migrations
                 name: "IX_StoreProducts_StoreId",
                 table: "StoreProducts",
                 column: "StoreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_CustomerId",
+                table: "Users",
+                column: "CustomerId");
         }
 
         /// <inheritdoc />
@@ -141,13 +179,16 @@ namespace StoreApiTest.Migrations
                 name: "StoreProducts");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Stores");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
         }
     }
 }

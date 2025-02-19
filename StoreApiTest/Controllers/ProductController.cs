@@ -16,7 +16,7 @@ namespace StoreApiTest.Controllers
         [HttpGet]
         public async Task test()
         {
-            var p = new Product { Description = "", Image = "url...", Price = 300, Stock = 40 };
+            var p = new Product { Description = "", Image = "url...", Price = 30 };
             await _repository.Create(p);
             await _repository.Save();
         }
