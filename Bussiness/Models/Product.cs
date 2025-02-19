@@ -14,4 +14,7 @@
         public required float Price { get; set; }
         public required string Image { get; set; }
     }
+
+    public class ProductUpdateDTO : Product { }
+
 }
