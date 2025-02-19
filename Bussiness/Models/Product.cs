@@ -16,6 +16,8 @@
         public required string Image { get; set; }
     }
 
-    public class ProductUpdateDTO : Product { }
+    public class ProductUpdateDTO : Product {
+        public new int? Id { get; set; }
+    }
 
 }
