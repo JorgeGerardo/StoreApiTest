@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using StoreApiTest.Data;
+
 namespace StoreApiTest
 {
     public class Program
@@ -6,6 +9,11 @@ namespace StoreApiTest
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var SqlConnection = builder.Configuration.GetConnectionString("SqlServerCon");
+            Console.WriteLine(SqlConnection);
+            builder.Services.AddDbContext<StoreContext>(options => options.UseSqlServer(SqlConnection));
+
 
             // Add services to the container.
 
