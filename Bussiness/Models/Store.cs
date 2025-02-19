@@ -13,4 +13,11 @@
         public required string Sucursal { get; set; }
         public required string Address { get; set; }
     }
+
+    public class StoreUpdateDto
+    {
+        public required int Id { get; set; }
+        public required string Sucursal { get; set; }
+        public required string Address { get; set; }
+    }
 }
