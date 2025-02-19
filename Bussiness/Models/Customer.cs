@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bussiness.Models
+﻿namespace Bussiness.Models
 {
-    public class Customer
+    public class Customer : BaseModel
     {
-        public int Id { get; set; }
         public required string Name { get; set; }
         public required string LastName { get; set; }
         public required string Addres { get; set; }

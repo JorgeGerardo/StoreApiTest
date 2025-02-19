@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bussiness.Models
+﻿namespace Bussiness.Models
 {
-    public class Store
+    public class Store : BaseModel
     {
-        public int Id { get; set; }
         public required string Surcursal { get; set; }
         public required string Addres { get; set; }
 
