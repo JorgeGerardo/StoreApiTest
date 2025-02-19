@@ -36,7 +36,25 @@ namespace StoreApiTest.Controllers
     //CxUD (CRUD):
     public abstract partial class GenericController<T, TRepository, TCreateDTO, TUpdateDTO>
     {
-        //TODO: Update endpoint is missing
+        [HttpPut("{id}")]
+        public virtual async Task<IActionResult> Update(int id, TUpdateDTO createDto)
+        {
+            var entity = await _repository.GetById(id);
+            if (entity is null)
+                return NotFound();
+
+            try { MapToUpdateEntity(entity, createDto); }
+            catch (Exception e)
+            {
+                return BadRequest(new ProblemDetails() { Detail = e.Message });
+            }
+
+            _repository.Update(entity);
+            await _repository.Save();
+
+            return NoContent();
+        }
+
 
 
         [HttpPost]
