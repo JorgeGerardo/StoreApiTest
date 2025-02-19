@@ -7,12 +7,28 @@ namespace StoreApiTest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : GenericController<Product, ProductRepository, ProductCreateDTO, ProductUpdateDTO>
     {
-        private readonly IGenericRepository<Product> _repository;
-        public ProductController(IGenericRepository<Product> _repository) =>
-            this._repository = _repository;
+        public ProductController(IGenericRepository<Product> _repository) : base(_repository) { }
+        protected override Product MapToEntity(ProductCreateDTO dto)
+        {
+            return new Product
+            {
+                Description = dto.Description,
+                Image = dto.Image,
+                Price = dto.Price,
+                Title = dto.Title,
+            };
+        }
 
-
+        protected override Product MapToUpdateEntity(Product currentState, ProductUpdateDTO dto)
+        {
+            currentState.Price = dto.Price;
+            currentState.Title = dto.Title;
+            currentState.Image = dto.Image;
+            currentState.Description = dto.Description;
+            return currentState;
+        }
     }
+
 }
