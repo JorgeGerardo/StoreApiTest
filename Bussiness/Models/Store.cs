@@ -7,4 +7,10 @@
 
         public IEnumerable<ProductStore> Products { get; set; } = new List<ProductStore>();
     }
+
+    public class StoreCreateDto
+    {
+        public required string Sucursal { get; set; }
+        public required string Address { get; set; }
+    }
 }
