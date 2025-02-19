@@ -44,7 +44,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Bussiness.Models.CustomerProduct", b =>
@@ -70,7 +70,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CustomerProducts");
+                    b.ToTable("CustomerProducts", (string)null);
                 });
 
             modelBuilder.Entity("Bussiness.Models.Product", b =>
@@ -97,7 +97,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Bussiness.Models.ProductStore", b =>
@@ -123,7 +123,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.ToTable("StoreProducts");
+                    b.ToTable("StoreProducts", (string)null);
                 });
 
             modelBuilder.Entity("Bussiness.Models.Store", b =>
@@ -144,7 +144,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stores");
+                    b.ToTable("Stores", (string)null);
                 });
 
             modelBuilder.Entity("Bussiness.Models.CustomerProduct", b =>
