@@ -11,7 +11,7 @@ namespace Bussiness.Repositories
         Task<T?> GetById(int id);
         Task<bool> Exist(int id);
 
-        void Updated(T entity);
+        void Update(T entity);
         Task<bool> Delete(int id);
 
 
@@ -60,7 +60,7 @@ namespace Bussiness.Repositories
             return true;
         }
 
-        public void Updated(T entity) =>
+        public void Update(T entity) =>
             Entities.Update(entity);
 
     }
