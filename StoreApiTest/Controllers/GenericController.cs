@@ -24,7 +24,7 @@ namespace StoreApiTest.Controllers
         public virtual async Task<IEnumerable<T>> Get(int page = 0, int? pageSize = null) =>
             await setPagination(page, pageSize).ToListAsync();
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}")]
         public virtual async Task<ActionResult<T>> GetById(int id)
         {
             T? res = await _repository.GetById(id);
