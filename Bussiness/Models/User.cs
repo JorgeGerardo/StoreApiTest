@@ -16,6 +16,12 @@ namespace Bussiness.Models
         public required Role Role { get; set; }
     }
 
+    public class UserLoginDto
+    {
+        public required string Email { get; set; }
+        public required string Password { get; set; }
+    }
+
     public enum Role
     {
         Customer, Admin
