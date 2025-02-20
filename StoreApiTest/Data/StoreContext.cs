@@ -14,7 +14,7 @@ namespace StoreApiTest.Data
         public DbSet<Store> Stores { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<InventoryTransaction> Transactions { get; set; }
+        public DbSet<InventaryTransaction> Transactions { get; set; }
 
         //Intermediat
         public DbSet<CustomerProduct> CustomerProducts { get; set; }
@@ -34,7 +34,7 @@ namespace StoreApiTest.Data
 
         private void SetInventory(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<InventoryTransaction>()
+            modelBuilder.Entity<InventaryTransaction>()
             .HasOne(it => it.StoreStock)
             .WithMany(ps => ps.Transacctions)
             .HasForeignKey(it => it.TransactionId)

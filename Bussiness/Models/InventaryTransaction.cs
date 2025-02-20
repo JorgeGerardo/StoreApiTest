@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bussiness.Models
 {
-    public class InventoryTransaction : BaseModel
+    public class InventaryTransaction : BaseModel
     {
         public required int Quatity { get; set; }
         public required DateTime Date { get; set; }

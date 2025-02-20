@@ -10,7 +10,7 @@
 
         public required int Stock { get; set; }
 
-        public IEnumerable<InventoryTransaction> Transacctions { get; set; } = new List<InventoryTransaction>();
+        public IEnumerable<InventaryTransaction> Transacctions { get; set; } = new List<InventaryTransaction>();
     }
 
     //TODO: Tenemos un problema de diseño, lo que sucede es lo siguiente
