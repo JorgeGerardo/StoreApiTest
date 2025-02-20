@@ -18,7 +18,7 @@ namespace StoreApiTest.Data
 
         //Intermediat
         public DbSet<CustomerProduct> CustomerProducts { get; set; }
-        public DbSet<StoreInventary> StoreProducts { get; set; }
+        public DbSet<StoreInventary> StoreInventaries { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

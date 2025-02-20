@@ -27,7 +27,7 @@
      *  La tabla esa tendrá la fecha y el StoreId como ProductIt y deberá estar relacionada a una 
      *  tabla intermedia
      */
-    public class ProductStoreCreateDTO
+    public class StoreInventaryCreateDTO
     {
         public int ProductId { get; set; }
         public Product? Product { get; set; }
@@ -36,7 +36,7 @@
         public required int Stock { get; set; }
     }
 
-    public class ProductStoreUpdateDTO : BaseModel
+    public class StoreInventaryUpdateDTO : BaseModel
     {
         public required int ProductId { get; set; }
         public Product? Product { get; set; }
