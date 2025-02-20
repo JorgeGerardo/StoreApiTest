@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StoreApiTest.Migrations
 {
     /// <inheritdoc />
-    public partial class StockMoved : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,6 +34,7 @@ namespace StoreApiTest.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -113,8 +114,7 @@ namespace StoreApiTest.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     StoreId = table.Column<int>(type: "int", nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Stock = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,6 +131,22 @@ namespace StoreApiTest.Migrations
                         principalTable: "Stores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Description", "Image", "Price", "Title" },
+                values: new object[,]
+                {
+                    { 1, "Playera para hombre talla mediana en color negro", "https://i.imgur.com/QkIa5tT.jpeg", 700f, "Playera negra" },
+                    { 2, "Sudadera muy padre en color gris para hombres con frío", "https://i.imgur.com/wbIMMme.jpeg", 632f, "Sudadera" },
+                    { 3, "Sudadera muy padre en color gris oscuro para hombres que tengan frío", "https://i.imgur.com/R2PN9Wq.jpeg", 234f, "Sudadera dark gray" },
+                    { 4, "Es la misma sudadera solo que con otra foto y vendida como otro producto", "https://i.imgur.com/R2PN9Wq.jpeg", 234f, "Sudadera gris gray" },
+                    { 5, "Es una sudadera de color negro muuuuy bonita", "https://i.imgur.com/R2PN9Wq.jpeg", 879f, "Sudadera negra" },
+                    { 6, "Es un pantalón que parece pijama", "https://i.imgur.com/R2PN9Wq.jpeg", 879f, "Pantalón de pijama" },
+                    { 7, "Es un pantalón que parece pijama pero esta vez es para mujeres", "https://i.imgur.com/mp3rUty.jpeg", 373f, "Pijama mujer" },
+                    { 8, "Es un pantalón negro de pijama para caballero", "https://i.imgur.com/ZKGofuB.jpeg", 373f, "Pijama negra" },
+                    { 9, "Es un pantalón blanco de pijama para dama", "https://i.imgur.com/mp3rUty.jpeg", 723f, "Pijama blanca" }
                 });
 
             migrationBuilder.InsertData(

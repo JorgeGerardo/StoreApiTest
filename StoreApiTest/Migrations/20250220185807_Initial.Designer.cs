@@ -12,8 +12,8 @@ using StoreApiTest.Data;
 namespace StoreApiTest.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20250219192905_StockMoved")]
-    partial class StockMoved
+    [Migration("20250220185807_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,9 +95,87 @@ namespace StoreApiTest.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Playera para hombre talla mediana en color negro",
+                            Image = "https://i.imgur.com/QkIa5tT.jpeg",
+                            Price = 700f,
+                            Title = "Playera negra"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Sudadera muy padre en color gris para hombres con frío",
+                            Image = "https://i.imgur.com/wbIMMme.jpeg",
+                            Price = 632f,
+                            Title = "Sudadera"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Sudadera muy padre en color gris oscuro para hombres que tengan frío",
+                            Image = "https://i.imgur.com/R2PN9Wq.jpeg",
+                            Price = 234f,
+                            Title = "Sudadera dark gray"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Es la misma sudadera solo que con otra foto y vendida como otro producto",
+                            Image = "https://i.imgur.com/R2PN9Wq.jpeg",
+                            Price = 234f,
+                            Title = "Sudadera gris gray"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Es una sudadera de color negro muuuuy bonita",
+                            Image = "https://i.imgur.com/R2PN9Wq.jpeg",
+                            Price = 879f,
+                            Title = "Sudadera negra"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Es un pantalón que parece pijama",
+                            Image = "https://i.imgur.com/R2PN9Wq.jpeg",
+                            Price = 879f,
+                            Title = "Pantalón de pijama"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Es un pantalón que parece pijama pero esta vez es para mujeres",
+                            Image = "https://i.imgur.com/mp3rUty.jpeg",
+                            Price = 373f,
+                            Title = "Pijama mujer"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "Es un pantalón negro de pijama para caballero",
+                            Image = "https://i.imgur.com/ZKGofuB.jpeg",
+                            Price = 373f,
+                            Title = "Pijama negra"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "Es un pantalón blanco de pijama para dama",
+                            Image = "https://i.imgur.com/mp3rUty.jpeg",
+                            Price = 723f,
+                            Title = "Pijama blanca"
+                        });
                 });
 
             modelBuilder.Entity("Bussiness.Models.ProductStore", b =>
@@ -107,9 +185,6 @@ namespace StoreApiTest.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
