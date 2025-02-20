@@ -22,5 +22,19 @@ namespace StoreApiTest.Controllers
     public partial class StoreInventaryController
     {
         //Update stock
+        [HttpPut]
+        public async Task<object> UpdateStocke()
+        {
+            bool existe = await _repositoryProduct.Exist(1);
+            if (!existe) return NotFound(new ProblemDetails { Detail = "El producto no existe" });
+
+            bool storeExist = await _repositoryStore.Exist(1);
+            if (!storeExist) return NotFound(new ProblemDetails { Detail = "La tienda seleccionada no existe" });
+
+
+
+
+            return 0;
+        }
     }
 }
