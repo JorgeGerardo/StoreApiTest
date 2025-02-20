@@ -1,8 +1,7 @@
 ﻿namespace Bussiness.Models
 {
-    public class ProductStore
+    public class ProductStore : BaseModel
     {
-        public int Id { get; set; }
         public int ProductId { get; set; }
         public Product? Product { get; set; }
 
