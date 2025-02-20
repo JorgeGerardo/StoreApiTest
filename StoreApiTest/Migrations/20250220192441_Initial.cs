@@ -107,7 +107,7 @@ namespace StoreApiTest.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StoreProducts",
+                name: "StoreInventary",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -118,15 +118,50 @@ namespace StoreApiTest.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StoreProducts", x => x.Id);
+                    table.PrimaryKey("PK_StoreInventary", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StoreProducts_Products_ProductId",
+                        name: "FK_StoreInventary_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StoreProducts_Stores_StoreId",
+                        name: "FK_StoreInventary_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transactions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Quatity = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    StoreId = table.Column<int>(type: "int", nullable: false),
+                    TransactionId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Transactions_StoreInventary_TransactionId",
+                        column: x => x.TransactionId,
+                        principalTable: "StoreInventary",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Stores_StoreId",
                         column: x => x.StoreId,
                         principalTable: "Stores",
                         principalColumn: "Id",
@@ -170,14 +205,29 @@ namespace StoreApiTest.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StoreProducts_ProductId",
-                table: "StoreProducts",
+                name: "IX_StoreInventary_ProductId",
+                table: "StoreInventary",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StoreProducts_StoreId",
-                table: "StoreProducts",
+                name: "IX_StoreInventary_StoreId",
+                table: "StoreInventary",
                 column: "StoreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_ProductId",
+                table: "Transactions",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_StoreId",
+                table: "Transactions",
+                column: "StoreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_TransactionId",
+                table: "Transactions",
+                column: "TransactionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_CustomerId",
@@ -192,19 +242,22 @@ namespace StoreApiTest.Migrations
                 name: "CustomerProducts");
 
             migrationBuilder.DropTable(
-                name: "StoreProducts");
+                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "StoreInventary");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Stores");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
         }
     }
 }

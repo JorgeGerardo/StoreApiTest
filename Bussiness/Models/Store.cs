@@ -5,7 +5,7 @@
         public required string Sucursal { get; set; }
         public required string Address { get; set; }
 
-        public IEnumerable<ProductStore> Products { get; set; } = new List<ProductStore>();
+        public IEnumerable<StoreInventary> Products { get; set; } = new List<StoreInventary>();
     }
 
     public class StoreCreateDto

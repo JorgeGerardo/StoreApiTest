@@ -73,6 +73,40 @@ namespace StoreApiTest.Migrations
                     b.ToTable("CustomerProducts");
                 });
 
+            modelBuilder.Entity("Bussiness.Models.InventoryTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quatity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TransactionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("StoreId");
+
+                    b.HasIndex("TransactionId");
+
+                    b.ToTable("Transactions");
+                });
+
             modelBuilder.Entity("Bussiness.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -175,7 +209,28 @@ namespace StoreApiTest.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Bussiness.Models.ProductStore", b =>
+            modelBuilder.Entity("Bussiness.Models.Store", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sucursal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Stores");
+                });
+
+            modelBuilder.Entity("Bussiness.Models.StoreInventary", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -198,28 +253,7 @@ namespace StoreApiTest.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.ToTable("StoreProducts");
-                });
-
-            modelBuilder.Entity("Bussiness.Models.Store", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Sucursal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stores");
+                    b.ToTable("StoreInventary", (string)null);
                 });
 
             modelBuilder.Entity("Bussiness.Models.User", b =>
@@ -293,7 +327,34 @@ namespace StoreApiTest.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Bussiness.Models.ProductStore", b =>
+            modelBuilder.Entity("Bussiness.Models.InventoryTransaction", b =>
+                {
+                    b.HasOne("Bussiness.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bussiness.Models.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bussiness.Models.StoreInventary", "StoreStock")
+                        .WithMany("Transacctions")
+                        .HasForeignKey("TransactionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Store");
+
+                    b.Navigation("StoreStock");
+                });
+
+            modelBuilder.Entity("Bussiness.Models.StoreInventary", b =>
                 {
                     b.HasOne("Bussiness.Models.Product", "Product")
                         .WithMany()
@@ -329,6 +390,11 @@ namespace StoreApiTest.Migrations
             modelBuilder.Entity("Bussiness.Models.Store", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Bussiness.Models.StoreInventary", b =>
+                {
+                    b.Navigation("Transacctions");
                 });
 #pragma warning restore 612, 618
         }

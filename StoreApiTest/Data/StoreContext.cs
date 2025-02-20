@@ -14,10 +14,11 @@ namespace StoreApiTest.Data
         public DbSet<Store> Stores { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<InventoryTransaction> Transactions { get; set; }
 
         //Intermediat
         public DbSet<CustomerProduct> CustomerProducts { get; set; }
-        public DbSet<ProductStore> StoreProducts { get; set; }
+        public DbSet<StoreInventary> StoreProducts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +27,18 @@ namespace StoreApiTest.Data
 
             ProductDataSeed(modelBuilder);
             UserDataSeed(modelBuilder);
+            SetInventory(modelBuilder);
+
+            modelBuilder.Entity<StoreInventary>(e => e.ToTable("StoreInventary"));
+        }
+
+        private void SetInventory(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<InventoryTransaction>()
+            .HasOne(it => it.StoreStock)
+            .WithMany(ps => ps.Transacctions)
+            .HasForeignKey(it => it.TransactionId)
+            .OnDelete(DeleteBehavior.Restrict);
         }
 
         private void ProductDataSeed(ModelBuilder modelBuilder)

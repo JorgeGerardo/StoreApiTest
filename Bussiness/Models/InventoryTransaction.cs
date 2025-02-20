@@ -17,6 +17,9 @@ namespace Bussiness.Models
         public int StoreId { get; set; }
         public Store? Store { get; set; }
 
+        public required StoreInventary StoreStock { get; set; }
+        public int TransactionId { get; set; }
+
     }
 
     public class InventoryTransactionCreateDTO
