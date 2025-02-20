@@ -9,7 +9,6 @@
         public Store? Store { get; set; }
 
         public required int Stock { get; set; }
-        public required DateTime Date { get; set; }
     }
 
     //TODO: Tenemos un problema de diseño, lo que sucede es lo siguiente
@@ -28,13 +27,22 @@
      */
     public class ProductStoreCreateDTO
     {
-        public int Id { get; set; }
         public int ProductId { get; set; }
         public Product? Product { get; set; }
         public int StoreId { get; set; }
         public Store? Store { get; set; }
         public required int Stock { get; set; }
+    }
 
+    public class ProductStoreUpdateDTO : BaseModel
+    {
+        public required int ProductId { get; set; }
+        public Product? Product { get; set; }
+
+        public required int StoreId { get; set; }
+        public Store? Store { get; set; }
+
+        public required int Stock { get; set; }
 
 
     }
