@@ -26,6 +26,7 @@ namespace StoreApiTest.Data
             base.OnModelCreating(modelBuilder);
 
             ProductDataSeed(modelBuilder);
+            CustomerDataSeed(modelBuilder);
             UserDataSeed(modelBuilder);
             SetInventory(modelBuilder);
 
@@ -368,6 +369,27 @@ namespace StoreApiTest.Data
 
                 );
         }
+
+        private void CustomerDataSeed(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>().HasData(
+                    new Customer
+                    {
+                        Id = 2,
+                        Name = "Lucrecia",
+                        Address = "Monterrey",
+                        LastName = "Lopez",
+                    },
+                    new Customer
+                    {
+                        Id = 3,
+                        Name = "Samuel",
+                        Address = "Guadalajara",
+                        LastName = "Urias",
+                    }
+                );
+        }
+
         private void UserDataSeed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
@@ -384,13 +406,15 @@ namespace StoreApiTest.Data
                         Email = "lucrecia@example.com",
                         HashPassword = TokenService.EncrypBySHA256("lucrecia"),
                         Role = Role.Customer,
+                        CustomerId = 2
                     },
                     new User() //customer
                     {
                         Id = 3,
                         Email = "samueljuan@example.com",
                         HashPassword = TokenService.EncrypBySHA256("samueljuan"),
-                        Role = Role.Customer
+                        Role = Role.Customer,
+                        CustomerId = 3
                     }
                 );
         }
