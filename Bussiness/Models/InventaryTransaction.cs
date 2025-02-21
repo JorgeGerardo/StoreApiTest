@@ -26,13 +26,13 @@ namespace Bussiness.Models
 
     }
 
-    public class InventoryTransactionCreateDTO
+    public class InventaryTransactionCreateDTO
     {
         public required int Quatity { get; set; }
         public int ProductId { get; set; }
         public int StoreId { get; set; }
     }
 
-    public class InventoryTransactionUpdateDTO : InventoryTransactionCreateDTO { }
+    public class InventaryTransactionUpdateDTO : InventaryTransactionCreateDTO { }
 
 }
