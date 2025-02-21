@@ -20,4 +20,9 @@
         public new int? Id { get; set; }
     }
 
+
+    public class ProductCartItem : Product
+    {
+        public required int Quantity { get; set; }
+    }
 }
