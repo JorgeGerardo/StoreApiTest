@@ -16,6 +16,8 @@ namespace StoreApiTest.Services
             builder.Services.AddScoped<IGenericRepository<Store>, StoreRepository>();
             builder.Services.AddScoped<IGenericRepository<Customer>, CustomerRepository>();
             builder.Services.AddScoped<IGenericRepository<StoreInventary>, StoreInventaryRepository>();
+            builder.Services.AddScoped<IGenericRepository<CustomerProduct>, CustomerProductRepository>();
+
         }
     }
 }
