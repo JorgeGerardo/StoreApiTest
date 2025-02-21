@@ -1,9 +1,7 @@
 ﻿namespace Bussiness.Models
 {
-    public class CustomerProduct
+    public class CustomerProduct :BaseModel
     {
-        public int Id { get; set; }
-
         public int CustomerId { get; set; }
         public Customer? Customer { get; set; }
 
@@ -13,4 +11,5 @@
         public required DateTime Date { get; set; }
 
     }
+
 }
