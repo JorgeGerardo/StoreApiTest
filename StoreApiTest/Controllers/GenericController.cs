@@ -116,7 +116,9 @@ namespace StoreApiTest.Controllers
         private const int DEFAULT_PAGE_SIZE = 10;
         private IQueryable<T> setPagination(int page, int? pageSize = null, IQueryable<T>? query = null)
         {
-            page--;
+            //TODO: Check this
+            if (page > 0)
+                page--;
 
             if (query is null)
                 query = _repository.GetAll();
