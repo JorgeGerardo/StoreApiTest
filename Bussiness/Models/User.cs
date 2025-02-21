@@ -9,7 +9,7 @@ namespace Bussiness.Models
         [JsonPropertyOrder(-1)]
         public required string Email { get; set; }
         public required string HashPassword { get; set; }
-
+        [JsonIgnore]
         public Customer? Customer { get; set; }
         public int? CustomerId { get; set; }
 

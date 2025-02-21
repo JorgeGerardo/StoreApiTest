@@ -5,9 +5,11 @@ namespace Bussiness.Models
     public class StoreInventary : BaseModel
     {
         public int ProductId { get; set; }
+        [JsonIgnore]
         public Product? Product { get; set; }
 
         public int StoreId { get; set; }
+        [JsonIgnore]
         public Store? Store { get; set; }
 
         public required int Stock { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace Bussiness.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Bussiness.Models
 {
     public class Customer : BaseModel
     {
@@ -6,6 +8,7 @@
         public required string LastName { get; set; }
         public required string Address { get; set; }
 
+        [JsonIgnore]
         public IEnumerable<CustomerProduct> CartProducts { get; set; } = new List<CustomerProduct>();
     }
 

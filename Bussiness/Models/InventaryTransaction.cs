@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Bussiness.Models
@@ -12,12 +13,15 @@ namespace Bussiness.Models
         public required DateTime Date { get; set; }
 
         public int ProductId { get; set; }
+        [JsonIgnore]
         public Product? Product { get; set; }
 
         public int StoreId { get; set; }
+        [JsonIgnore]
         public Store? Store { get; set; }
 
-        public required StoreInventary StoreStock { get; set; }
+        [JsonIgnore]
+        public StoreInventary? StoreStock { get; set; }
         public int TransactionId { get; set; }
 
     }
