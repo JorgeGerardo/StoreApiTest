@@ -31,4 +31,14 @@ namespace Bussiness.Models
         public required int StoreId { get; set; }
         public required int Stock { get; set; }
     }
+
+    public class StoreInventaryView
+    {
+        public required string Title { get; set; }
+        public required string Image { get; set; }
+        public required int ProductId { get; set; }
+        public required int StoreId { get; set; }
+        public required int Stock { get; set; }
+    }
+
 }

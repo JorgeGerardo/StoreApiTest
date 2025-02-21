@@ -1,7 +1,10 @@
 ﻿using Bussiness.Models;
 using Bussiness.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace StoreApiTest.Controllers
 {
@@ -72,4 +75,34 @@ namespace StoreApiTest.Controllers
 
     }
 
+
+    public partial class StoreInventaryController
+    {
+        [HttpGet("store-inventary/{storeId}"), Authorize]
+        public async Task<List<StoreInventaryView>> getInventary(int storeId)
+        {
+            var storeInventaryItems = await _repositoryStoreInventary.GetAll()
+                .Where(s => s.StoreId == storeId)
+                .ToListAsync();
+
+            // Obtener los productos correspondientes a esos ProductId
+            var productIds = storeInventaryItems.Select(i => i.ProductId).Distinct().ToList();
+            var products = await _repositoryProduct.GetAll()
+                .Where(p => productIds.Contains(p.Id))
+                .ToListAsync();
+
+            // Crear una lista de StoreInventaryView combinando inventario y productos
+            var result = storeInventaryItems.Select(i => new StoreInventaryView
+            {
+                StoreId = i.StoreId,
+                ProductId = i.ProductId,
+                Stock = i.Stock,
+                Image = products.FirstOrDefault(p => p.Id == i.ProductId)?.Image ?? "",
+                Title = products.FirstOrDefault(p => p.Id == i.ProductId)?.Title ?? "Sin nombre"
+            }).ToList();
+
+            return result;
+        }
+    }
 }
+
