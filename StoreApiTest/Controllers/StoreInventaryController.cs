@@ -97,11 +97,33 @@ namespace StoreApiTest.Controllers
                 StoreId = i.StoreId,
                 ProductId = i.ProductId,
                 Stock = i.Stock,
+                StockId = i.Id,
                 Image = products.FirstOrDefault(p => p.Id == i.ProductId)?.Image ?? "",
                 Title = products.FirstOrDefault(p => p.Id == i.ProductId)?.Title ?? "Sin nombre"
             }).ToList();
 
             return result;
+        }
+
+        [HttpPut("add-product-store/{storeId}")]
+        public async Task<ActionResult> AddProductToIventary(int storeId, StoreInventaryCreateDTO dto)
+        {
+            var registerExist = _repositoryStoreInventary.GetAll()
+                .Any(i => i.StoreId == storeId && i.ProductId == dto.ProductId);
+
+            if (registerExist)
+                return BadRequest();
+
+            var newStock = new StoreInventary
+            {
+                Stock = dto.Stock,
+                ProductId = dto.ProductId,
+                StoreId = storeId,
+            };
+
+            await _repositoryStoreInventary.Create(newStock);
+            await _repositoryStoreInventary.Save();
+            return Ok();
         }
     }
 }
