@@ -14,6 +14,8 @@ namespace Bussiness.Models
 
         public required DateTime Date { get; set; }
 
+        public required int Quantity { get; set; }
+
     }
 
 }
