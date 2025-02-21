@@ -103,6 +103,13 @@ namespace StoreApiTest.Controllers
 
     }
 
+    public abstract partial class GenericController<T, TRepository, TCreateDTO, TUpdateDTO>
+    {
+        [HttpGet("count")]
+        public async Task<int> count() =>
+            await _repository.GetAll().CountAsync();
+    }
+
     //Tools:
     public abstract partial class GenericController<T, TRepository, TCreateDTO, TUpdateDTO>
     {
