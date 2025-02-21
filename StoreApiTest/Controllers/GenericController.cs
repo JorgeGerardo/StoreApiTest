@@ -20,11 +20,11 @@ namespace StoreApiTest.Controllers
     //Get's:
     public abstract partial class GenericController<T, TRepository, TCreateDTO, TUpdateDTO>
     {
-        [HttpGet]
+        [HttpGet, Authorize]
         public virtual async Task<IEnumerable<T>> Get(int page = 0, int? pageSize = null) =>
             await setPagination(page, pageSize).ToListAsync();
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public virtual async Task<ActionResult<T>> GetById(int id)
         {
             T? res = await _repository.GetById(id);
@@ -36,7 +36,7 @@ namespace StoreApiTest.Controllers
     //CxUD (CRUD):
     public abstract partial class GenericController<T, TRepository, TCreateDTO, TUpdateDTO>
     {
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize]
         public virtual async Task<IActionResult> Update(int id, TUpdateDTO createDto)
         {
             var entity = await _repository.GetById(id);
@@ -57,7 +57,7 @@ namespace StoreApiTest.Controllers
 
 
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public virtual async Task<IActionResult> Add(TCreateDTO createDto)
         {
             try
@@ -77,7 +77,7 @@ namespace StoreApiTest.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public virtual async Task<IActionResult> HardDelete(int id)
         {
             bool isDeleted = await _repository.Delete(id);
@@ -105,7 +105,7 @@ namespace StoreApiTest.Controllers
 
     public abstract partial class GenericController<T, TRepository, TCreateDTO, TUpdateDTO>
     {
-        [HttpGet("count")]
+        [HttpGet("count"), Authorize]
         public async Task<int> count() =>
             await _repository.GetAll().CountAsync();
     }
