@@ -29,8 +29,70 @@ namespace StoreApiTest.Data
             CustomerDataSeed(modelBuilder);
             UserDataSeed(modelBuilder);
             SetInventory(modelBuilder);
+            SetStoresDataSeed(modelBuilder);
 
             modelBuilder.Entity<StoreInventary>(e => e.ToTable("StoreInventary"));
+        }
+
+        private void SetStoresDataSeed(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Store>().HasData(
+                new Store
+                {
+                    Id = 1,
+                    Sucursal = "Warlmart Central",
+                    Address = "Monterrey, N.L"
+                },
+                new Store
+                {
+                    Id = 2,
+                    Sucursal = "Soriana Centro",
+                    Address = "Guadalajara, JAL"
+                },
+                new Store
+                {
+                    Id = 3,
+                    Sucursal = "Chedraui Insurgentes",
+                    Address = "Ciudad de México, CDMX"
+                },
+                new Store
+                {
+                    Id = 4,
+                    Sucursal = "La Comer Puebla",
+                    Address = "Puebla, PUE"
+                },
+                new Store
+                {
+                    Id = 5,
+                    Sucursal = "H-E-B Tijuana",
+                    Address = "Tijuana, BC"
+                },
+                new Store
+                {
+                    Id = 6,
+                    Sucursal = "Oxxo Las Torres",
+                    Address = "León, GTO"
+                },
+                new Store
+                {
+                    Id = 7,
+                    Sucursal = "7-Eleven Zapopan",
+                    Address = "Zapopan, JAL"
+                },
+                new Store
+                {
+                    Id = 8,
+                    Sucursal = "Bodega Aurrera Mérida",
+                    Address = "Mérida, YUC"
+                },
+                new Store
+                {
+                    Id = 9,
+                    Sucursal = "Superama Cancún",
+                    Address = "Cancún, QROO"
+                }
+
+            );
         }
 
         private void SetInventory(ModelBuilder modelBuilder)
