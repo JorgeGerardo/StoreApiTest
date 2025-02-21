@@ -375,6 +375,13 @@ namespace StoreApiTest.Data
             modelBuilder.Entity<Customer>().HasData(
                     new Customer
                     {
+                        Id = 1,
+                        Name = "Jorguito",
+                        Address = "Guanajuato",
+                        LastName = "Gerardo",
+                    },
+                    new Customer
+                    {
                         Id = 2,
                         Name = "Lucrecia",
                         Address = "Monterrey",
@@ -399,6 +406,7 @@ namespace StoreApiTest.Data
                         Email = "jorguito@example.com",
                         HashPassword = TokenService.EncrypBySHA256("jorguito"),
                         Role = Role.Admin,
+                        CustomerId = 1,
                     },
                     new User() //customer
                     {
