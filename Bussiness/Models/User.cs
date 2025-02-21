@@ -22,6 +22,12 @@ namespace Bussiness.Models
         public required string Password { get; set; }
     }
 
+    public class UserAuth
+    {
+        public required string Token { get; set; }
+        public required int UserId { get; set; }
+    }
+
     public enum Role
     {
         Customer, Admin

@@ -77,7 +77,7 @@ namespace StoreApiTest.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public virtual async Task<IActionResult> HardDelete(int id)
         {
             bool isDeleted = await _repository.Delete(id);

@@ -21,7 +21,7 @@ namespace StoreApiTest.Controllers
         }
 
 
-        [HttpPost("/login"), AllowAnonymous]
+        [HttpPost("/api/login"), AllowAnonymous]
         public async Task<ActionResult<string>> Login(UserLoginDto userData)
         {
             var user = await _users.GetAll()
@@ -37,7 +37,9 @@ namespace StoreApiTest.Controllers
             if (jwt is null) return
                     StatusCode(500);
 
-            return TokenService.GenerateToken(user, jwt);
+            var token = TokenService.GenerateToken(user, jwt);
+            return Ok(new UserAuth { Token = token, UserId = user.Id});
         }
     }
+
 }
